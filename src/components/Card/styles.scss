@@ -1,0 +1,23 @@
+@import '../varabiles.scss';
+
+.react-card {
+  &-flip {
+    cursor: pointer;
+    font-weight: bold;
+    height: 125px;
+    width: 125px;
+  }
+
+  &-front {
+    background: $cards-front-background;
+  }
+
+  &-back {
+    align-items: center;
+    background: $cards-back-background;
+    display: flex;
+    font-size: $icons-size;
+    justify-content: center;
+    vertical-align: middle;
+  }
+}

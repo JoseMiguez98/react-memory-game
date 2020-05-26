@@ -1,0 +1,27 @@
+@import '../varabiles.scss';
+
+.game-board {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 10px 0;
+  height: 600px;
+  width: 700px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  color: #ddd;
+  font-size: $font-size;
+  padding: 10px 10px;
+
+  &__left {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+}
