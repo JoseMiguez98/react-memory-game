@@ -1,0 +1,26 @@
+@import '../varabiles.scss';
+
+.change-player {
+  border: $border-width solid $border-color;
+  padding: $wrapper-vertical-padding $wrapper-horizontal-padding;
+  width: $wrapper-width;
+
+  &__label {
+    color: $font-color;
+    font-size: $font-size;
+    padding: 10px 0;
+    text-align: start;
+    display: inline-block;
+  }
+
+  &__input {
+    margin-right: 15px;
+  }
+
+  &__button {
+    background: $button-background;
+    border: none;
+    border-radius: 3px;
+    width: 60px;
+  }
+}
