@@ -1,23 +1,56 @@
 //  @packages
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // @app
+import Header from './components/Header';
 import Board from './components/Board';
-import { getRandomIcons } from 'utils/icons';
+import CurrentPlayer from './components/CurrentPlayer';
+import { getRandomIcons } from './utils/icons';
 
 // @own
-import './App.css';
+import './App.scss';
+import PositionTable from './components/PositionTable';
+import ChangePlayer from './components/ChangePlayer';
 
 const App = () => {
-  const [cards, setCards] = useState(() => getRandomIcons(10));
+  const [attempts, setAttempts] = useState(0);
+  const [cards, setCards] = useState([]);
+  const [won, setWon] = useState(false);
+  const [name, setName] = useState('Obama');
+  const [isChangePlayer, setChangePlayer] = useState(false);
 
-  function restartGame() {
+  useEffect(() => (startGame()), [])
+
+  function startGame() {
     setCards(getRandomIcons(10));
+    setAttempts(0);
+    setWon(false);
   }
 
   return (
     <div className="App">
-      <Board cards={cards} onRestart={restartGame} />
+      <Header
+        onNewGame={startGame}
+        onChangePlayer={setChangePlayer}
+        isChangePlayer={isChangePlayer}
+      />
+      <div className="game-container">
+        <div className="game-container__col">
+          <Board
+            cards={cards}
+            setAttempts={setAttempts}
+            setWon={setWon}
+            won={won}
+          />
+        </div>
+        <div className="game-container__col">
+          {isChangePlayer ?
+          <ChangePlayer setName={setName} onChangePlayer={setChangePlayer} /> :
+          <CurrentPlayer name={name} attempts={attempts}/>}
+          <PositionTable />
+        </div>
+          {won && <h1 className="won-message">You won in {attempts} attempts! Congratulations</h1>}
+      </div>
     </div>
   );
 

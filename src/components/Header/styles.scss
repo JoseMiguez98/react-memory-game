@@ -1,0 +1,32 @@
+@import '../varabiles.scss';
+
+.header {
+  border-bottom: $border-width solid $border-color;
+  color: $font-color;
+  display: flex;
+  font-size: $header-font-size;
+  height: 70px;
+  justify-content: space-between;
+  padding: 10px;
+
+  &__left {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+
+  &__navbar {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+
+  &__navButton {
+    background: none;
+    border: none;
+    color: $font-color;
+    cursor: pointer;
+    font-size: $header-font-size;
+    outline: none;
+  }
+}

@@ -4,42 +4,22 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // @app
-import { getRandomIcons } from 'utils/icons';
-import { shuffle } from 'utils/array.js';
+import { shuffle } from '../../utils/array';
 import Card from '../Card';
 
 // @own
 import './styles.scss';
 
-const Header = ({ attempts, won, onRestart }) => (
-  <div className="header">
-    <div className="header__left">
-      <span>React-Memoria</span>
-      <div className="reset-button">
-        <button onClick={onRestart}>Reiniciar</button>
-      </div>
-    </div>
-
-    {won && 'You win! Congratulations'}
-
-    <div className="header__right">
-      Intentos: {attempts}
-    </div>
-  </div>
-);
-
-const Board = () => {
-  const [gameCards, setCards] = useState([]);
+const Board = ({ cards, won, setAttempts, setWon }) => {
   const [cardsStatus, setCardsStatus] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [disabled, setDisabled] = useState(false);
-  const [attempts, setAttempts] = useState(0);
-  const [won, setWon] = useState(false);
+  const [gameCards, setGameCards] = useState([]);
 
   // Duplicate and shuffle cards
   useEffect(() => {
-    startGame();
-  }, []);
+    shuffleCards();
+  }, [cards]);
 
   // Check if there are two flipped cards and if are equals.
   useEffect(() => {
@@ -70,16 +50,12 @@ const Board = () => {
     if(!won && cardsStatus.length && !cardsStatus.includes(false)) {
       setWon(true);
     }
-  }, [cardsStatus, won]);
+  }, [cardsStatus]);
 
-  function startGame() {
-    const cards= getRandomIcons(10);
+  function shuffleCards() {
     const shuffled = shuffle(cards.concat(...cards));
-
-    setCards(shuffled);
+    setGameCards(shuffled);
     setCardsStatus(new Array(shuffled.length).fill(false));
-    setAttempts(0);
-    setWon(false);
   }
 
   function onCardFlip(index) {
@@ -97,7 +73,6 @@ const Board = () => {
 
   return (
     <Fragment>
-      <Header attempts={attempts} won={won} onRestart={startGame}/>
       <div className="game-board">
         {gameCards.map((card, i) => (
           <Card

@@ -1,3 +1,5 @@
+@import './components/varabiles.scss';
+
 .App {
   text-align: center;
 }
@@ -34,5 +36,24 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.game-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 100%;
+  padding: 50px 0;
+
+  &__col {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+
+  .won-message {
+    width: 100%;
+    color: $font-color;
   }
 }
