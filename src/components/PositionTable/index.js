@@ -1,31 +1,38 @@
 // @packages
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // @app
 import './styles.scss';
 
-const PositionTable = () => (
-  <div className="position-table">
-    <div className="position-table__title">Position table</div>
-    <div className="position-table__positions">
-      <table className="position-table__table">
-        <tbody>
-          <tr>
-            <td className="position-table__table-cell">Player 1</td>
-            <td className="position-table__table-cell">80</td>
-          </tr>
-          <tr>
-            <td className="position-table__table-cell">Player 2</td>
-            <td className="position-table__table-cell">40</td>
-          </tr>
-          <tr>
-            <td className="position-table__table-cell">Player 3</td>
-            <td className="position-table__table-cell">20</td>
-          </tr>
-        </tbody>
-      </table>
+const PositionTable = () => {
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    async function fetchAPI() {
+      let response = await fetch('api/positions');
+      response = await response.json();
+      return response;
+    }
+    fetchAPI().then(data => setPositions(data));
+  },[])
+
+  return (
+    <div className="position-table">
+      <div className="position-table__title">Position table</div>
+      <div className="position-table__positions">
+        <table className="position-table__table">
+          <tbody>
+            {positions.length ? positions.map(pos => (
+              <tr className="position-table__table-row" key={`position${pos.id}`}>
+                <td className="position-table__table-cell">{pos.name}</td>
+                <td className="position-table__table-cell">{pos.score}</td>
+              </tr>
+            )) : <tr><td>Loading...</td></tr>}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-);
+  )
+};
 
 export default PositionTable;
