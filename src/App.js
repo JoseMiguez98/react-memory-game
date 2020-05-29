@@ -6,11 +6,14 @@ import Header from './components/Header';
 import Board from './components/Board';
 import CurrentPlayer from './components/CurrentPlayer';
 import { getRandomIcons } from './utils/icons';
+import PositionTable from './components/PositionTable';
+import ChangePlayer from './components/ChangePlayer';
+import { createApi } from './components/api';
 
 // @own
 import './App.scss';
-import PositionTable from './components/PositionTable';
-import ChangePlayer from './components/ChangePlayer';
+
+createApi();
 
 const App = () => {
   const [attempts, setAttempts] = useState(0);

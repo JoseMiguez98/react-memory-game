@@ -19,6 +19,7 @@ const Board = ({ cards, won, setAttempts, setWon }) => {
   // Duplicate and shuffle cards
   useEffect(() => {
     shuffleCards();
+    setFlippedCards([]);
   }, [cards]);
 
   // Check if there are two flipped cards and if are equals.
